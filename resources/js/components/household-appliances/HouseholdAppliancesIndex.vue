@@ -41,7 +41,9 @@
                         {{ item.brand }}
                     </td>
                     <td class="px-6 py-4 text-sm leading-5 text-center text-gray-900 whitespace-no-wrap">
-                        <router-link :to="{ name: 'household-appliances.edit', params: { id: item.id } }" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25">Edit</router-link>
+                        <router-link :to="{ name: 'household-appliances.edit', params: { id: item.id } }" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 mr-2">Edit</router-link>
+                        <button @click="deleteHouseholdAppliance(item.id)" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25">
+            Delete</button>
                     </td>
                 </tr>
             </template>
@@ -54,7 +56,17 @@
 import useHouseholdAppliances from '@/composables/household-appliances';
 import { onMounted } from 'vue';
 
-const { householdAppliances, indexHouseholdAppliances } = useHouseholdAppliances();
+const { householdAppliances, indexHouseholdAppliances, destroyHouseholdAppliance } = useHouseholdAppliances();
+
+const deleteHouseholdAppliance = async (id) => {
+    if (!window.confirm('Are you sure?')) {
+        return;
+    }
+
+    await destroyHouseholdAppliance(id);
+
+    await indexHouseholdAppliances();
+};
 
 onMounted(indexHouseholdAppliances);
 </script>

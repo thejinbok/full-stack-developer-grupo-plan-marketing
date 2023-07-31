@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/stoplight', 'stoplight');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('v1/household-appliances', HouseholdApplianceController::class);
+Route::prefix('v1')->group(function () {
+    Route::apiResource('/household-appliances', HouseholdApplianceController::class);
+});

@@ -1,0 +1,351 @@
+openapi: 3.1.0
+x-stoplight:
+  id: eykrq5v9133hi
+info:
+  title: REST API Specifications
+  version: 1.0.0-rc
+  license:
+    name: AGPL-3.0
+    url: 'https://www.gnu.org/licenses/agpl-3.0.html'
+  description: 'This documentation is intended to expose endpoint specifications, technical standards, and glossary of terms.'
+  contact:
+    name: Jin Bok
+    email: jinbok@quatredeux.com
+    url: 'mailto:jinbok@quatredeux.com'
+servers:
+  - url: 'http://127.0.0.1:8000/api'
+    description: localhost
+paths:
+  /v1/household-appliances:
+    get:
+      summary: Index Household Appliances
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    x-stoplight:
+                      id: 7clbeb3wo34ar
+                    uniqueItems: true
+                    minItems: 0
+                    items:
+                      $ref: '#/components/schemas/HouseholdAppliance'
+                      x-stoplight:
+                        id: ufpell9mm11ru
+                required:
+                  - data
+      operationId: get-v1-household-appliances
+      x-stoplight:
+        id: oes3p7q9ouvf1
+    post:
+      summary: Store Household Appliance
+      operationId: post-v1-household-appliances
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HouseholdAppliance'
+                    x-stoplight:
+                      id: o5x9qrs6p5mzs
+                required:
+                  - data
+        '422':
+          $ref: '#/components/responses/422'
+      x-stoplight:
+        id: 7qbga48jllpe0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: n89ps69ohwuqa
+                  writeOnly: true
+                description:
+                  type: string
+                  x-stoplight:
+                    id: s5oh2j7vh1wfe
+                  writeOnly: true
+                voltage:
+                  x-stoplight:
+                    id: d02aco1uuq8in
+                  enum:
+                    - 110
+                    - 220
+                  writeOnly: true
+                brand:
+                  x-stoplight:
+                    id: ghog0e1vqpx8r
+                  enum:
+                    - Brastemp
+                    - Electrolux
+                    - Fischer
+                    - LG
+                    - Samsung
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - voltage
+                - brand
+  '/v1/household-appliances/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Household appliance identifier.
+    get:
+      summary: Show Household Appliance by ID
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HouseholdAppliance'
+                    x-stoplight:
+                      id: s4qcg8qd59pv9
+                required:
+                  - data
+      operationId: get-v1-household-appliances-id
+      x-stoplight:
+        id: a09pxrwubbyf3
+    put:
+      summary: Update Household Appliance by ID
+      operationId: put-v1-household-appliances-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HouseholdAppliance'
+                    x-stoplight:
+                      id: zr560h3tyca2i
+                required:
+                  - data
+        '422':
+          $ref: '#/components/responses/422'
+      x-stoplight:
+        id: rgnwkt1x9yyin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: z9m26miifiy6i
+                  writeOnly: true
+                description:
+                  type: string
+                  x-stoplight:
+                    id: ot3bcj1agl94c
+                  writeOnly: true
+                voltage:
+                  x-stoplight:
+                    id: fhijule4qu7g5
+                  enum:
+                    - 110
+                    - 220
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - voltage
+    patch:
+      summary: Update Household Appliance by ID
+      operationId: patch-v1-household-appliances-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/HouseholdAppliance'
+                    x-stoplight:
+                      id: jgilpde6x7bvf
+                required:
+                  - data
+        '422':
+          $ref: '#/components/responses/422'
+      x-stoplight:
+        id: pdykr8dfxae5a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  x-stoplight:
+                    id: 1r07z9xjynqii
+                  writeOnly: true
+                description:
+                  type: string
+                  x-stoplight:
+                    id: mkonidq0e8e8f
+                  writeOnly: true
+                voltage:
+                  x-stoplight:
+                    id: 08ju569eypen7
+                  enum:
+                    - 110
+                    - 220
+                  writeOnly: true
+              required:
+                - name
+                - description
+                - voltage
+    delete:
+      summary: Destroy Household Appliance by ID
+      operationId: delete-v1-household-appliances-id
+      responses:
+        '204':
+          description: No Content
+      x-stoplight:
+        id: o4n91v8yc7v2q
+components:
+  schemas:
+    HouseholdAppliance:
+      title: HouseholdAppliance
+      x-stoplight:
+        id: gh4foarwou86k
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: 0ntnmmp58detu
+          format: int64
+          minimum: 1
+          readOnly: true
+        name:
+          type: string
+          x-stoplight:
+            id: k7dkbnlsfo0f0
+        description:
+          type: string
+          x-stoplight:
+            id: lkr4eszbbecby
+        voltage:
+          x-stoplight:
+            id: zv6zqw14o6yms
+          enum:
+            - 110
+            - 220
+        brand:
+          x-stoplight:
+            id: k3bkmt6xesjjk
+          enum:
+            - Brastemp
+            - Electrolux
+            - Fischer
+            - LG
+            - Samsung
+        created_at:
+          type: string
+          x-stoplight:
+            id: z11xkqq0828e6
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          x-stoplight:
+            id: j3e7ne12v0zpg
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - name
+        - description
+        - voltage
+        - brand
+        - created_at
+        - updated_at
+  securitySchemes: {}
+  responses:
+    '422':
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+                x-stoplight:
+                  id: ldijxzzlvxe4j
+                minProperties: 1
+                properties:
+                  name:
+                    type: array
+                    x-stoplight:
+                      id: prjxki7i02q33
+                    minItems: 1
+                    items:
+                      x-stoplight:
+                        id: vzjbfw43hicqy
+                      type: string
+                      readOnly: true
+                  description:
+                    type: array
+                    x-stoplight:
+                      id: sgy4v8nhp1ow1
+                    minItems: 1
+                    items:
+                      x-stoplight:
+                        id: d2kmj9xl65nyo
+                      type: string
+                      readOnly: true
+                  voltage:
+                    type: array
+                    x-stoplight:
+                      id: th6ybte50e2y6
+                    minItems: 1
+                    items:
+                      x-stoplight:
+                        id: ptxmtjkfsk26a
+                      type: string
+                      readOnly: true
+                  brand:
+                    type: array
+                    x-stoplight:
+                      id: hymwnzl21czog
+                    minItems: 1
+                    items:
+                      x-stoplight:
+                        id: vx09kiyx3s8gr
+                      type: string
+                      readOnly: true
+            required:
+              - errors

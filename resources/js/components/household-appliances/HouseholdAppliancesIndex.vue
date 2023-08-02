@@ -5,8 +5,8 @@
         </div>
     </div>
 
-    <div class="min-w-full overflow-hidden overflow-x-auto align-middle sm:rounded-md">
-        <table class="min-w-full border divide-y divide-gray-200">
+    <div class="overflow-hidden overflow-x-auto align-middle sm:rounded-md">
+        <table class="w-full border divide-y divide-gray-200">
             <thead>
             <tr>
                 <th class="px-6 py-3 bg-gray-50">
